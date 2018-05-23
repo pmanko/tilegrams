@@ -374,7 +374,6 @@ export default class GridGraphic extends Graphic {
 
   render(ctx) {
     this._ctx = ctx
-
     this._populateTileIdArray()
 
     // background pattern

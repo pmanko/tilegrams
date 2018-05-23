@@ -5,6 +5,7 @@ import usTopoJson from '../../maps/us/us-110m.topo.json'
 // import ukAuthorityTopoJson from '../../maps/uk/local-authority.topo.json'
 import germanyConstituencyTopoJson from '../../maps/germany/constituency.topo.json'
 import franceRegionTopoJson from '../../maps/france/region.topo.json'
+import peruRegionTopoJson from '../../maps/peru/region.topo.json'
 import franceDepartmentTopoJson from '../../maps/france/department.topo.json'
 import netherlandsTopoJson from '../../maps/netherlands/netherlands.topo.json'
 
@@ -14,6 +15,7 @@ import fipsHash from '../../data/us/fips-to-state.json'
 // import authorityIdHash from '../../data/uk/id-to-authority.json'
 import wkrHash from '../../data/germany/wkr-to-name.json'
 import regionHash from '../../data/france/region-to-name.json'
+import peruRegionHash from '../../data/peru/region-to-name.json'
 import departmentHash from '../../data/france/department-to-name.json'
 import netherlandsHash from '../../data/netherlands/netherlands-names.json'
 
@@ -50,6 +52,16 @@ const franceProjection = (canvasDimensions) => {
   return geoMercator()
     .center([3.4, 46.3])
     .scale(canvasDimensions.height * 3.4)
+    .translate([
+      canvasDimensions.width * 0.5,
+      canvasDimensions.height * 0.5,
+    ])
+}
+
+const peruProjection = (canvasDimensions) => {
+  return geoMercator()
+    .center([-9.52, -75.3])
+    .scale(canvasDimensions.height * 5)
     .translate([
       canvasDimensions.width * 0.5,
       canvasDimensions.height * 0.5,
@@ -109,6 +121,12 @@ class GeographyResource {
         mapResource: new MapResource(netherlandsTopoJson, 'dutch municipalities'),
         geoCodeToName: netherlandsHash,
         projection: netherlandsProjection,
+      },
+      {
+        label: 'Peru - Regions',
+        mapResource: new MapResource(peruRegionTopoJson, 'Peru_adm1'),
+        geoCodeToName: peruRegionHash,
+        projection: peruProjection,
       },
     ]
   }

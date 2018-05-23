@@ -10,6 +10,8 @@ import franceRegionPopulation from '../../data/france/region-population.csv'
 import franceDepartment from '../../data/france/departments.csv'
 import netherlandsPopulation from '../../data/netherlands/netherlands-populations.csv'
 
+import peruRegionPopulation from '../../data/peru/region-population.csv'
+
 class DatasetResource {
   constructor() {
     /**
@@ -70,6 +72,12 @@ class DatasetResource {
         data: this.parseCsv(franceDepartment, 'France - Departments'),
         geography: 'France - Departments',
         defaultResolution: 1,
+      },
+      {
+        label: 'Peru Region Population',
+        data: this.parseCsv(peruRegionPopulation, 'Peru - Regions'),
+        geography: 'Peru - Regions',
+        defaultResolution: 30000,
       },
     ]
     this._selectedDatasetIndex = 2

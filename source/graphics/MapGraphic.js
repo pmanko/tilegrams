@@ -53,6 +53,7 @@ export default class MapGraphic extends Graphic {
     const baseMapLength = baseMapTopoJson.objects[mapResource.getObjectId()].geometries.length
     // for custom uploads with incomplete data
     if (dataset.data.length !== baseMapLength) {
+      console.log('FILTERED!')
       const statesWithData = dataset.data.map(datum => datum[0])
       filteredGeometries = baseMapTopoJson.objects[mapResource.getObjectId()].geometries
         .filter(geom => statesWithData.indexOf(geom.id) > -1)
@@ -106,10 +107,12 @@ export default class MapGraphic extends Graphic {
         .map(path => [hasMultiplePaths ? path[0] : path])
       return {bounds, paths}
     })
+    console.log(this._projectedStates)
   }
 
   render(ctx) {
     this._stateFeatures.features.forEach(feature => {
+      console.log(feature)
       ctx.beginPath()
       const hasMultiplePaths = feature.geometry.coordinates.length > 1
       feature.geometry.coordinates.forEach(path => {
